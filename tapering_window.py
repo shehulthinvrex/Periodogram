@@ -1,10 +1,8 @@
 """
 Tapering window function and example"""
 
-import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
-import readrdi as rd
 
 # Those who curious about why do we need to apply a tepering window prior
 # to the FFT, go through the following link for a laymans description.
@@ -72,12 +70,3 @@ def tapering_window(tseries,method="Hanning"):
         tseries_tapered=tseries*wind_kaiser
         print("kaiser window is applied.....")
     return tseries_tapered
-
-Data_Path="/home/jithin/Desktop/ADCP_Processing_Tool/adps-main/tests/BGS11000.000"
-vl = rd.VariableLeader(Data_Path)
-press=vl.vleader["Pressure"]
-
-tapered_series=tapering_window(press)
-plt.plot(tapered_series)
-plt.plot(press)
-plt.show()
