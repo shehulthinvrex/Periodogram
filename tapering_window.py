@@ -8,7 +8,6 @@ Created on Wed Jan 13 12:13:05 2021
 # Those who curious about why do we need to apply a tepering window prior
 # to the FFT, go through the following link for a laymans description.
 #  https://www.edn.com/windowing-functions-improve-fft-results-part-i/
-
 import numpy as np
 from scipy import signal
 
