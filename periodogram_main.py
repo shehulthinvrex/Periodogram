@@ -3,7 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import fft
 import detrend
-import tapering_window
+from sys import exit
+from tapering_window import tapering_window
 def periodogram_main(tseries,t,test='no',tap_method="Hanning",deterend="cubic"):
     pass
     #
@@ -49,10 +50,11 @@ def periodogram_main(tseries,t,test='no',tap_method="Hanning",deterend="cubic"):
         
         [abs_fft,f]=fft.npfft(y,t)  
         plt.subplot(1,2,2)
-        plt.plot(f[: len(f)//2],abs_fft,'k-')
+        plt.plot(f,abs_fft,'k-')
         plt.xlabel('frequency')
         plt.ylabel('psd')
         plt.show()
+        exit
     if deterend=="cubic":
         tseries_dtrend=detrend.detrend_scipy(tseries)
     elif deterend=='none':
@@ -69,7 +71,7 @@ def periodogram_main(tseries,t,test='no',tap_method="Hanning",deterend="cubic"):
     plt.xlabel('time')
     plt.ylabel('amplitude') 
     plt.subplot(1,2,2)
-    plt.plot(f[: len(f)//2],abs_fft,'k-')
+    plt.plot(f,abs_fft,'k-')
     plt.xlabel('frequency')
     plt.ylabel('psd')
     plt.show()    
@@ -77,5 +79,5 @@ def periodogram_main(tseries,t,test='no',tap_method="Hanning",deterend="cubic"):
         
         
         
-print('haha')    
+print('check:ok')    
         
