@@ -1,6 +1,7 @@
 # plt.show()
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
 """
 Created on Sun Dec 20 08:49:52 2020
 
@@ -24,6 +25,8 @@ https://www.ritchievink.com/blog/2017/04/23/understanding-the-fourier-transform-
 #     k = n.reshape((N, 1))
 #     e = np.exp(-2j * np.pi * k * n / N)
 #     return np.dot(e, x),N
+=======
+>>>>>>> 28dff82ecdfe3d39c6bbdf1744410d2af80267a9
 
 def npfft(x,t):
     '''Return the normalised amplitude of fft and frequency using fast FFT in Numpy'''
