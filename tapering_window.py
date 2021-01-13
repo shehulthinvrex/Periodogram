@@ -1,13 +1,16 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Tapering window function and example"""
+Created on Wed Jan 13 12:13:05 2021
 
-import numpy as np
-from scipy import signal
-
+@author: jithin
+"""
 # Those who curious about why do we need to apply a tepering window prior
 # to the FFT, go through the following link for a laymans description.
 #  https://www.edn.com/windowing-functions-improve-fft-results-part-i/
 
+import numpy as np
+from scipy import signal
 
 def tapering_window(tseries,method="Hanning"):
     """
