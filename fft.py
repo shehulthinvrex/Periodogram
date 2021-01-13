@@ -28,15 +28,15 @@ https://www.ritchievink.com/blog/2017/04/23/understanding-the-fourier-transform-
 #=======
 #>>>>>>> 28dff82ecdfe3d39c6bbdf1744410d2af80267a9
 
-def npfft(x,t):
+def npfft(x,delta_t):
     '''Return the normalised amplitude of fft and frequency using fast FFT in Numpy'''
     import numpy as np
     N=x.size
     fft = np.fft.fft(x)
-    T = t[1] - t[0]  # sampling interval 
+    #T = t[1] - t[0]  # sampling interval 
     # 1/T = frequency
     #ff = np.linspace(0, 1 / T, N)
-    ff=np.fft.fftfreq(N, d=T)
+    ff=np.fft.fftfreq(N, d=delta_t)
     f=ff[:N // 2]
     abs_fft=np.abs(fft)[:N//2] * 1 / N
     return abs_fft,f
