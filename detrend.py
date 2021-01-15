@@ -25,24 +25,3 @@ def detrend_scipy(tseries):
 	tseries_dtrend = signal.detrend(tseries)
 	return tseries_dtrend
 
-
-""" Test the detrend function"""
-# Generate random data
-x = np.linspace(0, 10, 100)
-y = x + np.random.normal(size=100)
-
-# Call detrend function
-trendline,y_detrend_mine = detrend(x,y)
-
-# Call scipy inbuilt detrend function for comparison
-y_detrend_scipy=detrend_scipy(y)
-
-
-# Compare the plots 
-plt.figure(figsize=(10, 5))
-plt.plot(x, y, label="y")
-plt.plot(x, trendline, label="trendline")
-plt.plot(x, y_detrend_mine, label="y_detrend")
-plt.plot(x, y_detrend_scipy,label="y_scipy")
-plt.legend(loc='best')
-plt.show()
