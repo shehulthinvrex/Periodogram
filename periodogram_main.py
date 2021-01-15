@@ -5,7 +5,7 @@ import fft
 import detrend
 from sys import exit
 from tapering_window import tapering_window
-def periodogram_main(tseries,t,test='no',tap_method="Hanning",deterend="cubic"):
+def periodogram_main(tseries,t,tap_method="Hanning",deterend="cubic",plot="no"):
     pass
     #
     ''' Function for generate a periodogram 
@@ -22,9 +22,8 @@ def periodogram_main(tseries,t,test='no',tap_method="Hanning",deterend="cubic"):
        4)deterend= Detrending method
                    "cubic"
                    "none"
-       5) test= just for testing no input data required
-               "yes"
-               "no"
+       5) plot= "yes" plots 
+               "no" returns data
        
                Output:
     1) powerspectral density
@@ -32,29 +31,10 @@ def periodogram_main(tseries,t,test='no',tap_method="Hanning",deterend="cubic"):
     2) plot
 
     Example:
-      periodogram_main(tseries,t,tap_method="Hanning",deterend="cubic",test='no')
+      periodogram_main(tseries,t,tap_method="Hanning",deterend="cubic",plot='no')
     
     '''
-    if test=="yes":
-        Fs = 60                         # sampling rate
-        Ts = 1.0/Fs                      # sampling interval
-        t = np.arange(0,1,Ts)            # time vector
-        ff = 100                         # frequency of the signal
-        y = np.sin(2 * np.pi * ff * t)
-        
-        # Plotting time series
-        plt.subplot(1,2,1)
-        plt.plot(t,y,'k-')
-        plt.xlabel('time')
-        plt.ylabel('amplitude')
-        
-        [abs_fft,f]=fft.npfft(y,t)  
-        plt.subplot(1,2,2)
-        plt.plot(f,abs_fft,'k-')
-        plt.xlabel('frequency')
-        plt.ylabel('psd')
-        plt.show()
-        exit
+    
     if deterend=="cubic":
         tseries_dtrend=detrend.detrend_scipy(tseries)
     elif deterend=='none':
@@ -65,17 +45,19 @@ def periodogram_main(tseries,t,test='no',tap_method="Hanning",deterend="cubic"):
         tseries_tapered=tapering_window(tseries,tap_method)
         
         
-    [abs_fft,f]=fft.npfft(tseries_tapered,t)
-    plt.subplot(1,2,1)
-    plt.plot(t,tseries,'k-')
-    plt.xlabel('time')
-    plt.ylabel('amplitude') 
-    plt.subplot(1,2,2)
-    plt.plot(f,abs_fft,'k-')
-    plt.xlabel('frequency')
-    plt.ylabel('psd')
-    plt.show()    
-    
+    [abs_fft,f]=fft.npfft(tseries_tapered,1)
+    if plot=="yes":
+        plt.subplot(1,2,1)
+        plt.plot(t,tseries,'k-')
+        plt.xlabel('time')
+        plt.ylabel('amplitude') 
+        plt.subplot(1,2,2)
+        plt.plot(f,abs_fft,'k-')
+        plt.xlabel('frequency')
+        plt.ylabel('psd')
+        plt.show()    
+    else:
+        return abs_fft,f
         
         
         
